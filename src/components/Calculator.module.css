@@ -1,4 +1,5 @@
 .main_container {
-  height: 400px;
   width: 300px !important;
+  padding: 10px;
+  border-radius: 5px;
 }
