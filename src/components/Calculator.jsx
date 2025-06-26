@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Calculator.module.css";
 
 const Calculator = () => {
+  const buttons = [""];
   return (
     <div className={`container  m-auto  border mt-5 ${styles.main_container}`}>
       <input
@@ -18,6 +19,11 @@ const Calculator = () => {
             </button>
           </div>
         ))}
+        <div className="col">
+          <button type="button" className="btn btn-primary  mt-1 w-100">
+            Calculate
+          </button>
+        </div>
       </div>
     </div>
   );
