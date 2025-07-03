@@ -1,13 +1,29 @@
-import React from "react";
-import styles from "./Calculator.module.css";
+import React, { useState } from "react";
+import styles from "./Calculator.module.css"
 
 const Calculator = () => {
+  const [inputValue, setInputValue] = useState(0);
   const buttons = ["+", "-", "*", "/", "C"];
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") console.log(event.target.value);
+  };
+
   return (
-    <div className={`container  m-auto  border mt-5 ${styles.main_container}`}>
+    <div
+      aria-label="calculator"
+      className={`container  m-auto  border mt-5 ${styles.main_container}`}
+    >
       <input
         id="input-box"
         type="number"
+        value={inputValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className="form-control mt-2"
         placeholder="Type..."
       />
@@ -21,7 +37,7 @@ const Calculator = () => {
         ))}
         {buttons?.map((btn) => (
           <div className="col-4">
-            <button type="button" className="btn btn-primary  mt-1 w-100">
+            <button type="button" className={`btn btn-primary  mt-1 w-100`}>
               {btn}
             </button>
           </div>

@@ -3,3 +3,10 @@
   padding: 10px;
   border-radius: 5px;
 }
+
+.btn_active {
+}
+
+.btn_active:active {
+  color: red;
+}
