@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styles from "./Calculator.module.css"
+import styles from "./Calculator.module.css";
+import Buttons from "./Buttons";
 
 const Calculator = () => {
-  const [inputValue, setInputValue] = useState(0);
-  const buttons = ["+", "-", "*", "/", "C"];
+  const [inputValue, setInputValue] = useState("");
+  const { main_container } = styles;
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -13,41 +14,32 @@ const Calculator = () => {
     if (event.key === "Enter") console.log(event.target.value);
   };
 
+  const handleBtnClick = (event, btnName) => {
+    if (btnName === "=") {
+      const result = eval(inputValue);
+      setInputValue(result);
+    } else if (btnName === "C") {
+      setInputValue("");
+    } else {
+      setInputValue((input) => input + btnName);
+    }
+  };
+
   return (
     <div
       aria-label="calculator"
-      className={`container  m-auto  border mt-5 ${styles.main_container}`}
+      className={`container  m-auto  border mt-5 ${main_container}`}
     >
       <input
         id="input-box"
-        type="number"
+        type="text"
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         className="form-control mt-2"
         placeholder="Type..."
       />
-      <div className="row mt-3">
-        {Array.from({ length: 10 }, (_, index) => (
-          <div className="col-4">
-            <button type="button" className="btn btn-primary mt-1 w-100">
-              {index}
-            </button>
-          </div>
-        ))}
-        {buttons?.map((btn) => (
-          <div className="col-4">
-            <button type="button" className={`btn btn-primary  mt-1 w-100`}>
-              {btn}
-            </button>
-          </div>
-        ))}
-        <div className="col">
-          <button type="button" className="btn btn-primary  mt-1 w-100">
-            Calculate
-          </button>
-        </div>
-      </div>
+      <Buttons handleBtnClick={handleBtnClick} />
     </div>
   );
 };
